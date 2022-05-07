@@ -29,6 +29,9 @@ To interact with the menu, enter the integer number \[0-8\] corresponding to the
 5. *Very Hard*
 6. *Impossible*
 
+![Screenshot of first 3 maze complexities](documentation/complexity1.png)
+![Screenshot of last 3 maze complexities](documentation/complexity2.png)
+
 **(4)** and **(5)** allow the user to change the background and foreground color of the maze respectively by entering the name of the color. The recognized color inputs are:
 + black
 + blue
