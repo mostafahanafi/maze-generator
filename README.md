@@ -2,6 +2,10 @@
 
 This program is a maze generator, with a console-based menu and graphics drawn using `graphics.h`. The algorithm used for generating the mazes is a *randomized depth-first search* (or, a recursive backtracker), and the one used for the solution is a *breadth-first search shortest path algorithm.* 
 
+## Examples
+![Screenshot showing maze generation menu and drawn maze](http://documentation/demo.png)
+![Screenshot showing settings changed and drawn solution](http://documentation/demo1.png)
+
 ## Structure
 
 The `/src` directory contains 5 .c files:
