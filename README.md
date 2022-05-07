@@ -54,6 +54,36 @@ To interact with the menu, enter the integer number \[0-8\] corresponding to the
 
 **(7)** and **(8)** are similar to **(1)** and **(2)** as they also draw a maze and show its solution respectively; however, the maze for **(7)** and **(8)** (named MOTD, or Maze of the Day) is generated using a set seed corresponding to the day. This not only means that the seed remains the same for the entire day, but that the seed is a brand new number each day.
 
+## Algorithms
+
+### Generation Algorithm
+
+The algorithm used for generating the maze is the randomized depth-first search, or recursive backtracker. It works like this:
+1.	Choose a cell as your starting point.
+2.	Mark the cell as visited, and check for all unvisited neighboring cells where there is no wall between the cell and its neighbor (i.e., where it is possible to travel between them).
+3.	If there exist random unvisited neighbors:
+- choose a random one.
+- remove the wall between the cell and the random neighbor.
+- move to this neighbor cell and repeat from 1.
+4.	If all neighbors are visited, backtrack to previous cell.
+5.	Repeat until all cells have been visited.
+
+### Solver Algorithm
+
+The algorithm used is a shortest path algorithm, specifically a BFS.
+
+0.	Set every cell’s distance from the starting cell to max (I set that to the number of cells), and the starting cell’s distance equal to 0 (by definition). Set currentCells\[\] = {0} and nextCells\[\] = {}.
+1.	Go through each cell in currentCells\[\].
+2.	Mark the cell as visited, and check for all unvisited neighboring cells where there is no wall between the cell and its neighbor (i.e., where it is possible to travel between them).
+3.	If there exist random unvisited neighbors:
+  - If the cell’s distance + 1 is less than the neighboring cells’ current distance, set each neighboring cell’s current distance equal to the cell’s distance + 1.
+  - Add the neighbor cell’s index to nextCells\[\].
+4.	Once it has gone through each cell in currentCells\[\], set currentCells\[\] to nextCells\[\] and reinitialize nextCells\[\].
+5.	Repeat from 1 until all cells have been visited.
+(At this point, all cells now have a distance from the starting cell)
+6.	Go to destination cell (bottom right corner).
+7.	Follow trail back to starting position (top left corner) by finding cells with distance 1 less than the current cell, thus reconstructing the solution path.
+
 ## Structure
 
 The `/src` directory contains 5 C files:
@@ -62,3 +92,5 @@ The `/src` directory contains 5 C files:
 + **algorithm.c**: Uses *Cells*, a custom struct housed in `algorithm.h`, to initialize the 'grid' (i.e. a 2D array of *Cells*) the maze is generated on. This file also contains the maze generation algorithm, as well as the solver algorithm.
 + **graphics.c**: This file contains the auxiliary functions used for generating graphics.
 + **draw.c**: Takes the output from the algorithm along with the user-specified settings and draws the maze on screen (with the option of overlaying the solution).
+
+The `settings.txt` file is 1 plaintext line that is dynamically edited and accessed, and is of the format `{complexity [1-6]} {background color} {foreground color} {solved [0,1]} {seed} {dimensions}`.
